@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>GraphQL&RESTful API</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+<div class="row">
+  <div class="col-sm-6">
+    <h1 class="display-4 text-center mt-5">RESTful API</h1>
+    <div class="card border-primary ml-3 mb-3" >
+      <div class="card-header">Core Idea</div>
+      <div class="card-body">
+          <h5 class="card-title">Resources(coupled)</h5>
+          <p class="card-text">Each resource is identifined by a URL: Send a <mark> GET</mark> request to URL => get a JSON response<hr><strong>The type, or shape, of the resource and the way you fetch that resource are coupled</strong></p>
+          <figure>
+            <figurecaption></figurecaption>
+            <pre>
+              <code contenteditable spellcheck="false">
+                GET /books/1<hr>
+                {
+                  "title": "Black Hole Blues",
+                  "author": { 
+                    "firstName": "Janna",
+                    "lastName": "Levin"
+                  }
+                  // ... more fields here
+                }
+              </code>
+            </pre>
+            </figure>
+      </div>   
+    </div> 
+    <div class="card border-primary ml-3 mt-5">
+        <div class="card-header text-center">Similar</div>
+        <div class="card-body">
+            <p><strong>Both have the idea of a resource, and can specify IDs for those resources.</strong></p>
+            <hr>
+            <p><strong>Both can be fetched via an HTTP GET request with a URL.</strong></p>
+        </div>   
+    </div> 
+    <div class="card border-primary ml-3 mt-5">
+        <div class="card-header text-center">Difference</div>
+        <div class="card-body">
+            <p><strong>URL with a GraphQL query specifies the resource we’re asking for and also which fields we care about. Also, rather than the server author deciding for us that the related author resource needs to be included, the consumer of the API decides.</strong></p>
+            <hr>
+            <p><strong>In REST, the endpoint you call is the identity of that object. In GraphQL, the identity is separate from how you fetch it.</strong></p>
+        </div>   
+    </div> 
+  </div>
+  <div class="col-sm-6">
+      <h1 class="display-4 text-center mt-5">GraphQL</h1>
+      <div class="card border-primary mr-3 mb-3" >
+          <div class="card-header">Core Idea</div>
+          <div class="card-body">
+              <h5 class="card-title">Resources(not coupled)</h5>
+              <p class="card-text"><strong>The description of a particular resource is not coupled to the way you retrieve it</strong></p>
+              <figure>
+                <figurecaption><em><mark>Build schema(schema.js)</mark></em></figurecaption>
+                <pre>
+                  <code contenteditable spellcheck="false">
+                    type Book {
+                        id: ID
+                        title: String
+                        published: Date
+                        price: String
+                        author: Author
+                      }
+                      type Author {
+                        id: ID
+                        firstName: String
+                        lastName: String
+                        books: [Book]
+                      }
+                  </code>
+                </pre>
+                </figure>
+                <figurecaption><em><mark>create a Query type in schema</mark></em></figurecaption>
+                <pre>
+                  <code contenteditable spellcheck="false">
+                    type Query {
+                        book(id: ID!): Book
+                        author(id: ID!): Author
+                      }
+                  </code>
+                </pre>
+                </figure>
+                <figurecaption><em><mark>Send a specifite request</mark></em></figurecaption>
+                <pre>
+                  <code contenteditable spellcheck="false">
+GET/graphql?query={ book(id: "1") { title, author { firstName }}}
+<hr>
+{
+"title": "Black Hole Blues",
+"author": {
+    "firstName": "Janna",
+}
+}
+                  </code>
+                </pre>
+                </figure>
+          </div>   
+      </div> 
+      <div class="card border-primary mr-3 mb-3" >
+          <div class="card-header">Header</div>
+          <div class="card-body">
+              <h5 class="card-title">Primary</h5>
+              <p class="card-text">some quick example</p>
+          </div>   
+      </div> 
+    </div>
+</div>
+
+
+
+<script src="app.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>

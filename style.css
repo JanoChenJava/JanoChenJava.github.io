@@ -1,0 +1,20 @@
+/* .row{
+  border-bottom: 1px solid #ccc;
+
+} */
+
+.card{
+  border-bottom: 1px solid #ccc
+}
+
+pre, code{
+  font-family: monospace, monospace;
+}
+pre{
+  overflow: auto;
+}
+pre > code{
+  display: block;
+  padding: 1rem;
+  word-wrap: normal;
+}
