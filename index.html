@@ -49,8 +49,18 @@
             <p><strong>URL with a GraphQL query specifies the resource we’re asking for and also which fields we care about. Also, rather than the server author deciding for us that the related author resource needs to be included, the consumer of the API decides.</strong></p>
             <hr>
             <p><strong>In REST, the endpoint you call is the identity of that object. In GraphQL, the identity is separate from how you fetch it.</strong></p>
+            <hr>
+            <p><strong>Even if a REST API returns only a basic partial by default, there are still more bits being transferred over the wire by default, than with the GraphQL approach.</strong></p>
         </div>   
-    </div> 
+    </div>
+    <div class="card border-warning ml-3 my-5">
+      <div class="card-header ">Caching</div>
+      <div class="card-body">
+          <p><strong>REST Makes Caching Easier At All Levels</strong></p>
+          <hr>
+          <p>In an endpoint-based API, clients can use HTTP caching to easily avoid refetching resources, and for identifying when two resources are the same. The URL in these APIs is a globally unique identifier that the client can leverage to build a cache.</p>
+      </div>   
+  </div>  
   </div>
   <div class="col-sm-6">
       <h1 class="display-4 text-center mt-5">GraphQL</h1>
@@ -58,7 +68,9 @@
           <div class="card-header">Core Idea</div>
           <div class="card-body">
               <h5 class="card-title">Resources(not coupled)</h5>
+              <hr>
               <p class="card-text"><strong>The description of a particular resource is not coupled to the way you retrieve it</strong></p>
+              <hr>
               <figure>
                 <figurecaption><em><mark>Build schema(schema.js)</mark></em></figurecaption>
                 <pre>
@@ -89,7 +101,7 @@
                   </code>
                 </pre>
                 </figure>
-                <figurecaption><em><mark>Send a specific request</mark></em></figurecaption>
+                <figurecaption><em><mark>Send a specifite request</mark></em></figurecaption>
                 <pre>
                   <code contenteditable spellcheck="false">
 GET/graphql?query={ book(id: "1") { title, author { firstName }}}
@@ -105,14 +117,36 @@ GET/graphql?query={ book(id: "1") { title, author { firstName }}}
                 </figure>
           </div>   
       </div> 
-      <div class="card border-primary mr-3 mb-3" >
-          <div class="card-header">Header</div>
+      <div class="card border-warning mr-3 my-5" >
+          <div class="card-header">Catching</div>
           <div class="card-body">
-              <h5 class="card-title">Primary</h5>
-              <p class="card-text">some quick example</p>
+              <h5 class="card-title">No Providing Object Identifiers</h5>
+              <hr>
+              <p class="card-text">In GraphQL, though, there's no URL-like primitive that provides this globally unique identifier for a given object. It's hence a best practice for the API to expose such an identifier for clients to use. </p>
           </div>   
       </div> 
     </div>
+   
+  <div class="card border-primary mx-auto my-5">
+      <div class="card-header text-center">Roundtrips</div>
+      <img class="card-img-top" src="show.png" alt="Card image cap">
+      <div class="card-body">
+        <p class="card-text">An artists’ interpretation of fetching resources with multiple REST roundtrips vs. one GraphQL request</p>
+      </div>
+    </div>
+    <div class="card border-warning mx-auto my-5" >
+        <div class="card-header">Summary</div>
+        <div class="card-body">
+            <h5 class="card-title">Why Not Use Both?</h5>
+            <hr>
+            
+            <p class="card-text">In a world of SoA, you are likely to have multiple services, which expose multiple APIs. In the RPC vs REST article I point out that some services might be REST and some might be RPC, and you can absolutely throw some GraphQL in with your REST. </p>
+            
+            <p class="card-text">One mix of REST and GraphQL could just be adding a /graphql endpoint to api.whatever.com and having that as your GraphQL endpoint on an REST API.</p>
+            <p class="card-text">Another, is one that has been vaguely tossed around at work, which is the idea of having one GraphQL API, acting as a gateway to our other multiple REST APIs.</p>
+            <p class="card-text">Having one GraphQL server act as a sort of data proxy, giving one entry point for mixed data, one Authentication scheme despite each REST API having its own "unique" approach to tokens, one HTTP call for clients - despite it hitting multiple actual REST APIs, etc., would be a damn powerful thing.</p>
+        </div>   
+    </div> 
 </div>
 
 
