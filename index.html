@@ -140,11 +140,11 @@ GET/graphql?query={ book(id: "1") { title, author { firstName }}}
             <h5 class="card-title">Why Not Use Both?</h5>
             <hr>
             
-            <p class="card-text">In a world of SoA, you are likely to have multiple services, which expose multiple APIs. In the RPC vs REST article I point out that some services might be REST and some might be RPC, and you can absolutely throw some GraphQL in with your REST. </p>
+            <p class="card-text">In a world of SoA, you are likely to have multiple services, which expose multiple APIs. Some services might be REST and some might be RPC, and you can absolutely throw some GraphQL in with your REST. </p>
             
             <p class="card-text">One mix of REST and GraphQL could just be adding a /graphql endpoint to api.whatever.com and having that as your GraphQL endpoint on an REST API.</p>
             <p class="card-text">Another, is one that has been vaguely tossed around at work, which is the idea of having one GraphQL API, acting as a gateway to our other multiple REST APIs.</p>
-            <p class="card-text">Having one GraphQL server act as a sort of data proxy, giving one entry point for mixed data, one Authentication scheme despite each REST API having its own "unique" approach to tokens, one HTTP call for clients - despite it hitting multiple actual REST APIs, etc., would be a damn powerful thing.</p>
+            <p class="card-text">Having one GraphQL server act as a sort of data proxy, giving one entry point for mixed data, one Authentication scheme despite each REST API having its own "unique" approach to tokens, one HTTP call for clients - despite it hitting multiple actual REST APIs, etc., would be a powerful thing.</p>
         </div>   
     </div> 
 </div>
